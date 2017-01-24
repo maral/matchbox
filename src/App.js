@@ -1,21 +1,39 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Matchbox, { Match } from './Matchbox';
+import matchboxPicture from './img/matchbox.png';
 import './App.css';
 
 class App extends Component {
   render() {
+    let matchboxes = [9, 8, 12];
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+        <AppHeader/>
+        <div className="App-intro">
+          {matchboxes.map((val, index) => 
+            <Matchbox key={index}
+              value={val} />
+          )}
+          {[...Array(10)].map((x, i) =>
+            <Match key={i + 1} />
+          )}
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
       </div>
     );
   }
+}
+
+function AppHeader(props) {
+  return (
+    <div className="App-header">
+      <img src={matchboxPicture} className="App-logo" alt="logo" />
+      <Title text="Matchbox"/>
+    </div>
+  );
+}
+
+function Title(props) {
+  return <h1>{props.text}</h1>;
 }
 
 export default App;

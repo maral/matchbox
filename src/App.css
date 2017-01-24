@@ -2,10 +2,16 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.App-header h1, .App-logo {
+  display: inline-block;
+  vertical-align: middle;
 }
+
+.App-logo {
+  height: 150px;
+  margin-right: 20px;
+}
+
 
 .App-header {
   background-color: #222;
@@ -16,9 +22,67 @@
 
 .App-intro {
   font-size: large;
+  padding-top: 20px;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.Matchbox {
+  position: relative;
+  display: inline-block;
+  margin-top: 0;
+  height: 233px;
+  width: 120px;
+}
+
+.Matchbox .Front, .Matchbox .Inside, .Matchbox .MatchWrapper {
+  position: absolute;
+  display: inline-block;
+  top: 30px;
+  left: 0;
+  transition: top .3s;
+}
+
+.Matchbox .Front {
+  width: 120px;
+  height: 173px;
+  z-index: 102;
+}
+
+.Matchbox .Inside {
+  width: 116px;
+  height: 169px;
+  border: 2px solid #333;
+  border-radius: 1px;
+  background-color: #f0f8ff;
+  z-index: 100;
+}
+
+.Matchbox.open .Front {
+  top: 60px;
+}
+
+.Matchbox.open .Inside {
+  top: 0px;
+}
+
+.Matchbox .MatchWrapper {
+  top: 40px;
+  z-index: 101;
+  width: 110px;
+  height: 163px;
+  padding: 5px;
+}
+
+.Matchbox.open .MatchWrapper {
+  top: 10px;
+}
+
+.Matchbox .MatchWrapper div {
+  position: absolute;
+  top: 22px;
+  padding: 6px;
+}
+
+.Match {
+  height: 134px;
+  margin: 1px;
 }
