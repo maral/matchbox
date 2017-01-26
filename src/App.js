@@ -16,7 +16,7 @@ class App extends Component {
     this.state = {
       isSolved: false,
       level: level,
-      showTools: true,
+      showTools: false,
       mode: "m",
       equation: new Equation({level: level}),
       counter: 0,

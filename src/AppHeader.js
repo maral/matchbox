@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Button,
+  Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
 class AppHeader extends Component {
   constructor(props) {
@@ -7,12 +8,19 @@ class AppHeader extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      showAbout: false,
     };
   }
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
+    });
+  }
+
+  toggleAbout = () => {
+    this.setState({
+      showAbout: !this.state.showAbout
     });
   }
   
@@ -25,14 +33,34 @@ class AppHeader extends Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/about/">About</NavLink>
+                <NavLink href="#" onClick={this.toggleAbout}>About</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://github.com/maral/matchbox">Github</NavLink>
+                <NavLink href="https://github.com/maral/matchbox" target="_blank">Github</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
         </Navbar>
+
+        <div>
+          <Modal isOpen={this.state.showAbout} toggle={this.toggleAbout}>
+            <ModalHeader toggle={this.toggleAbout}>O aplikaci Matchbox algebra</ModalHeader>
+            <ModalBody>
+              <p>
+                Aplikace Matchbox algebra vznikla pro obohacení výuky rovnic. Aplikace je více než inspirována
+                appletem <a href="http://66.147.244.109/~mathsapp/mathsapplets/page2/page54/index.html" target="_blank">Matchbox algebra</a>,
+                který již není funkční a tato aplikace je jeho náhradou.
+              </p>
+              <p>
+                Autor je studentem PedF UK a práce byla součástí jeho zápočtu na předmět Didaktika matematiky I. Aplikace
+                je Open source, zdrojové kódy jsou dostupné na <a href="https://github.com/maral/matchbox" target="_blank">Githubu</a>.
+              </p>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="secondary" onClick={this.toggleAbout}>Zavřít</Button>
+            </ModalFooter>
+          </Modal>
+        </div>
       </div>
     );
   }
