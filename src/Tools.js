@@ -58,14 +58,13 @@ class Tools extends Component {
         </Col>
 
         <Col md="4" xs="12">
-          {[...Array(3)].map((x, i) =>
-            <div key={i}>
-              {[...Array(5)].map((y, j) =>
-                <NumberButton selected={this.state.number} value={i * 5 + j + 1} onSelect={this.changeNumber}
-                  key={i * 5 + j} />
-              )}
-            </div>
-          )}
+          <Row className="justify-content-center">
+            {[...Array(16)].map((x, i) =>
+              <Col key={i} xs="auto">
+                <NumberButton selected={this.state.number} value={i + 1} onSelect={this.changeNumber} />
+              </Col>
+            )}
+          </Row>
         </Col>
 
         <Col md="4" xs="12">

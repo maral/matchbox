@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
+import { Button, Row, Col } from 'reactstrap';
 
 export function AnswerBox(props) {
   return (
@@ -8,16 +8,14 @@ export function AnswerBox(props) {
         {props.mode === "m" ? "Kolik sirek je v krabičce?" : 
           <div>Jakou hodnotu má <strong>x</strong>?</div>}
       </div>
-      <div className="Answers">
-        {[...Array(3)].map((x, i) =>
-          <div key={i}>
-            {[...Array(5)].map((y, j) =>
-              <Answer key={j} value={i*5 + j} isCorrect={i*5 + j === props.result}
-                isSolved={props.isSolved} doAnswer={props.doAnswer} />
-            )}
-          </div>
+      <Row className="Answers justify-content-center">
+        {[...Array(16)].map((x, i) =>
+          <Col xs="auto" key={i}>
+            <Answer value={i} isCorrect={i === props.result}
+              isSolved={props.isSolved} doAnswer={props.doAnswer} />
+          </Col>
         )}
-      </div>
+      </Row>
     </div>
   );
 }

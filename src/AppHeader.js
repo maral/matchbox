@@ -33,7 +33,7 @@ class AppHeader extends Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="#" onClick={this.toggleAbout}>About</NavLink>
+                <NavLink href="#" onClick={this.toggleAbout}>O aplikaci</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="https://github.com/maral/matchbox" target="_blank">Github</NavLink>

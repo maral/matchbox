@@ -149,6 +149,7 @@
   top: 15px;
   left: 15px;
   right: 15px;
+  z-index: 1000;
 }
 
 .example-enter {
@@ -183,4 +184,8 @@
 .Tools .Radio {
   display: inline-block;
   margin: 0 8%;
+}
+
+.Tools .col-md-4 {
+    margin-bottom: 20px;
 }
