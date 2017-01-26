@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  min-height: 600px;
 }
 
 .App-header h1, .App-logo {
@@ -25,18 +26,23 @@
   padding-top: 20px;
 }
 
+.EquationRepresentation {
+  margin-bottom: 20px;
+}
+
 .Matchbox {
   position: relative;
   display: inline-block;
+  vertical-align: middle;
   margin-top: 0;
-  height: 233px;
+  height: 263px;
   width: 120px;
 }
 
 .Matchbox .Front, .Matchbox .Inside, .Matchbox .MatchWrapper {
   position: absolute;
   display: inline-block;
-  top: 30px;
+  top: 60px;
   left: 0;
   transition: top .3s;
 }
@@ -48,8 +54,8 @@
 }
 
 .Matchbox .Inside {
-  width: 116px;
-  height: 169px;
+  width: 120px;
+  height: 173px;
   border: 2px solid #333;
   border-radius: 1px;
   background-color: #f0f8ff;
@@ -57,32 +63,124 @@
 }
 
 .Matchbox.open .Front {
-  top: 60px;
+  top: 90px;
 }
 
 .Matchbox.open .Inside {
-  top: 0px;
+  top: 30px;
 }
 
 .Matchbox .MatchWrapper {
-  top: 40px;
+  top: 70px;
   z-index: 101;
-  width: 110px;
-  height: 163px;
+  width: 120px;
+  height: 173px;
   padding: 5px;
 }
 
 .Matchbox.open .MatchWrapper {
-  top: 10px;
+  top: 40px;
 }
 
 .Matchbox .MatchWrapper div {
   position: absolute;
-  top: 22px;
-  padding: 6px;
+  top: 23px;
+  width: 110px;
+}
+
+.Matches {
+  height: 263px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.Matches .MatchWrapper {
+  margin-top: 45px;
+  position: relative;
+}
+
+.Matches .MatchWrapper div {
+  position: absolute;
+  left: 0;
+  top: 27px;
 }
 
 .Match {
   height: 134px;
   margin: 1px;
+}
+
+.Operator, .Number {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 20px;
+  font-size: 50px;
+}
+
+.Number {
+  margin: 20px 0;
+}
+
+.Question {
+  margin: 30px 0 15px;
+  font-size: 22px;
+}
+
+.btn-group {
+  margin-bottom: 20px;
+}
+
+.jumbotron {
+  padding: 2rem 1rem !important;
+}
+
+.Answer.btn-lg {
+  width: 50px;
+  padding: 0.75rem 0;
+  margin: 5px;
+}
+
+.alert .btn {
+    margin-left: 10px;
+}
+
+.alert.fixed {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+}
+
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 200ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 200ms ease-in;
+}
+
+.btn-group-vertical .btn.btn-lg {
+  width: 50px;
+  padding: 0;
+  line-height: 50px;
+  font-size: 30px;
+}
+
+.Tools {
+  padding: 20px;
+}
+
+.Tools .Radio {
+  display: inline-block;
+  margin: 0 8%;
 }
