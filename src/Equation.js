@@ -42,7 +42,6 @@ export default class Equation {
   }
 
   performOperation = (operation) => {
-    console.log(operation);
     if (!this.isOperationValid(operation)) {
       return false;
     }
@@ -149,11 +148,9 @@ export default class Equation {
     this.left.x = this.randomNumber(3, 6);
     this.right.x = this.randomNumber(2, this.left.x - 1);
     let diff = (this.left.x - this.right.x) * this.solution;
-    //console.log(diff);
+
     this.right.a = diff + this.randomNumber(-3, 3);
     this.left.a = this.right.a - diff;
-    //console.log(this.left.x + 'x + ' + this.left.a + ' = ' + this.right.x + 'x + ' + this.right.a);
-    //console.log('x = ' + this.solution);
   }
 
   swapSides = () => {

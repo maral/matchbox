@@ -13,11 +13,11 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
-    let level = 3;
+    let level = 1;
     this.state = {
       isSolved: false,
       level: level,
-      showTools: true,
+      showTools: false,
       mode: "m",
       equation: new Equation({level: level}),
       counter: 0,
