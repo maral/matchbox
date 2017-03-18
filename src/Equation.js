@@ -14,10 +14,7 @@ const defaults = {
 }
 export default class Equation {
   constructor(props) {
-    console.log("Creating new Equation: ");
-    console.log(props);
     this.props = props = Object.assign({}, defaults, props);
-    console.log(props);
     this.left = {
       x: props.left.x,
       a: props.left.a,
@@ -42,16 +39,16 @@ export default class Equation {
       }
       this.maybe(this.swapSides);
     }
-    console.log(this);
   }
 
-  performOperation = (operation, item, number) => {
-    if (!this.isOperationValid(operation, item, number)) {
+  performOperation = (operation) => {
+    console.log(operation);
+    if (!this.isOperationValid(operation)) {
       return false;
     }
 
-    let right = this.performOneSide(this.right, operation, item, number);
-    let left = this.performOneSide(this.left, operation, item, number);
+    let right = this.performOneSide(this.right, operation);
+    let left = this.performOneSide(this.left, operation);
     return new Equation({
       right: right,
       left: left,
@@ -60,17 +57,17 @@ export default class Equation {
     })
   }
 
-  performOneSide = (side, operation, item, number) => {
-    let doX = operation === "/" || item === "b";
-    let doA = operation === "/" || item === "m";
+  performOneSide = (side, operation) => {
+    let doX = operation.operator === "/" || operation.item === "b";
+    let doA = operation.operator === "/" || operation.item === "m";
     return {
-      x: doX ? this.singleOperation(side.x, operation, number) : side.x,
-      a: doA ? this.singleOperation(side.a, operation, number) : side.a,
+      x: doX ? this.singleOperation(side.x, operation.operator, operation.number) : side.x,
+      a: doA ? this.singleOperation(side.a, operation.operator, operation.number) : side.a,
     }
   }
 
-  singleOperation = (value, operation, operand) => {
-    switch (operation) {
+  singleOperation = (value, operator, operand) => {
+    switch (operator) {
       case "+":
         return value + operand;
       case "-":
@@ -82,13 +79,13 @@ export default class Equation {
     }
   }
 
-  isOperationValid = (operation, item, number) => {
-    if (operation === "/") {
-      if (number === 0) {
+  isOperationValid = (operation) => {
+    if (operation.operator === "/") {
+      if (operation.number === 0) {
         return false;
       } else {
-        if (this.left.a % number !== 0 || this.left.x % number !== 0 ||
-            this.right.a % number !== 0 || this.right.x % number !== 0) {
+        if (this.left.a % operation.number !== 0 || this.left.x % operation.number !== 0 ||
+            this.right.a % operation.number !== 0 || this.right.x % operation.number !== 0) {
               return false;
         }
       }

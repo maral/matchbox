@@ -7,21 +7,23 @@ import Tools from './Tools';
 import Equation from './Equation';
 import { YesNoAlert } from './Alert';
 import EquationRepresentation from './EquationRepresentation';
+import OperationRepresentation from './OperationRepresentation';
 import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    let level = 1;
+    let level = 3;
     this.state = {
       isSolved: false,
       level: level,
-      showTools: false,
+      showTools: true,
       mode: "m",
       equation: new Equation({level: level}),
       counter: 0,
       alertClosed: false,
       progress: [],
+      operations: [],
       showProgress: false,
     };
   }
@@ -49,6 +51,7 @@ class App extends Component {
         alertClosed: false,
         level: newLevel,
         progress: [],
+        operations: [],
         showProgress: false,
       }
     });
@@ -73,52 +76,20 @@ class App extends Component {
     });
   }
 
-  onOperation = (operation, item, number) => {
+  onOperation = (operation) => {
     if (this.state.isSolved) {
       return;
     }
-    let eq = this.state.equation.performOperation(operation, item, number);
+    let eq = this.state.equation.performOperation(operation);
     if (eq !== false) {
       this.setState((prevState) => {
         return {
           equation: eq,
           progress: [...prevState.progress, prevState.equation],
+          operations: [...prevState.operations, operation],
         };
       });
     }
-  }
-
-  /* helper render methods */
-  getEquation = () => {
-    return <EquationRepresentation mode={this.state.mode} equation={this.state.equation}
-                isSolved={this.state.isSolved} />;
-  }
-
-  getAnswerBox = () => {
-    return <AnswerBox result={this.state.equation.getSolution()} doAnswer={this.doAnswer}
-                isSolved={this.state.isSolved} mode={this.state.mode} key={this.state.counter} />;
-  }
-
-  getTools = () => {
-    return <Tools mode={this.state.mode} onOperation={this.onOperation}/>;
-  }
-
-  getEquationAndAnswerBox = (cols) => {
-    return (
-      <Col md={cols} sm="12">
-        <Row>
-          <Col>
-            {this.getEquation()}
-          </Col>
-        </Row>
-
-        <Row>
-          <Col>
-            {this.getAnswerBox()}
-          </Col>
-        </Row>
-      </Col>
-    );
   }
 
   render() {
@@ -139,8 +110,18 @@ class App extends Component {
             {this.state.progress.map((equation, i) => (
               <Row key={i}>
                 <Col>
-                  <EquationRepresentation mode={this.state.mode} equation={equation}
-                    isSolved={false} />
+                  <Row>
+                    <Col xs="auto" className="Counter align-self-center">
+                      {i + 1})
+                    </Col>
+                    <Col>
+                      <EquationRepresentation mode={this.state.mode} equation={equation}
+                      isSolved={false} />
+                    </Col>
+                    <Col xs="auto" className="align-self-center">
+                      <OperationRepresentation mode={this.state.mode} operation={this.state.operations[i]}/>
+                    </Col>
+                  </Row>
                   <hr />
                 </Col>
               </Row>
@@ -148,33 +129,44 @@ class App extends Component {
 
             <Row>
               <Col>
-                <EquationRepresentation mode={this.state.mode} equation={this.state.equation}
-                  isSolved={true} />
+                <Row>
+                  <Col xs="auto" className="Counter align-self-center">
+                    {this.state.progress.length + 1})
+                  </Col>
+                  <Col>
+                    <EquationRepresentation mode={this.state.mode} equation={this.state.equation}
+                      isSolved={true} />
+                  </Col>
+                </Row>
               </Col>
             </Row>
             <hr />
           </Collapse>
         </Container>
         
-        <Container>
-          <Row>
-            <Col md="8" xs="12">
-              {this.getEquation()}
-            </Col>
-
-            <Col md="4" xs="12">
-              {this.getAnswerBox()}
-            </Col>
-          </Row>
-
-          {this.state.showTools && (
+        {!this.state.showProgress &&
+          <Container>
             <Row>
-              <Col>
-                {this.getTools()}
+              <Col md="8" xs="12">
+                <EquationRepresentation mode={this.state.mode} equation={this.state.equation}
+                  isSolved={this.state.isSolved} />
+              </Col>
+
+              <Col md="4" xs="12">
+                <AnswerBox result={this.state.equation.getSolution()} doAnswer={this.doAnswer}
+                  isSolved={this.state.isSolved} mode={this.state.mode} key={this.state.counter} />
               </Col>
             </Row>
-          )}
-        </Container>
+
+            {this.state.showTools && (
+              <Row>
+                <Col>
+                  <Tools mode={this.state.mode} onOperation={this.onOperation}/>
+                </Col>
+              </Row>
+            )}
+          </Container>
+        }
         <YesNoAlert message="Výborně! Přejete si novou rovnici?" onClose={this.closeAlert}
           isOpen={this.state.isSolved && !this.state.alertClosed} onConfirm={this.newEquation}
           onShowProgress={this.showProgress} />

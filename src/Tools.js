@@ -6,15 +6,15 @@ class Tools extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      operation: "-",
+      operator: "-",
       item: "m",
       number: 1,
     }
   }
 
-  changeOperation = (operation) => {
+  changeOperator = (operator) => {
     this.setState({
-      operation: operation,
+      operator: operator,
     });
   }
 
@@ -31,7 +31,11 @@ class Tools extends Component {
   }
 
   execute = () => {
-    this.props.onOperation(this.state.operation, this.state.item, this.state.number);
+    this.props.onOperation({
+      operator: this.state.operator,
+      item: this.state.item,
+      number: this.state.number
+    });
   }
 
   render() {
@@ -47,9 +51,9 @@ class Tools extends Component {
             { text: "-", value: "-" },
             { text: "+", value: "+" },
             { text: "÷", value: "/" },
-          ]} onChange={this.changeOperation} value={this.state.operation} />
+          ]} onChange={this.changeOperator} value={this.state.operator} />
 
-          {this.state.operation !== "/" && (
+          {this.state.operator !== "/" && (
             <Radio vertical options={[
               { text: this.props.mode === "m" ? "Sirky" : "Čísla", value: "m" },
               { text: this.props.mode === "m" ? "Krabičky" : "x", value: "b" },

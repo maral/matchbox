@@ -15,3 +15,11 @@ export function MinusOperator(props) {
 export function EqualsOperator(props) {
   return <Operator value="=" />;
 }
+
+export function DivideOperator(props) {
+  return <Operator value="÷" />;
+}
+
+export function Constant(props) {
+  return <Operator value={props.value} />;
+}
